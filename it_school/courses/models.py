@@ -14,7 +14,7 @@ class Mentor(models.Model):
     date_of_birth = models.DateTimeField()
     QualificationType = models.TextChoices('QualificationType', 'Junior Middle Senior')
     qualification = models.CharField(blank=True, choices=QualificationType.choices, max_length=10)
-    add_info = models.Model(max_length=40)
+    add_info = models.CharField(max_length=40)
 
 
 
@@ -31,13 +31,15 @@ class Listener(models.Model):
 class Request(models.Model):
     listener = models.ManyToManyField(Listener)
     course = models.ManyToManyField(Course)
-    DaysofstudyType = models.TextChoices('DaysofstudyType', 'Monday Tuesday Wednesday Thursday Friday Saturday')
-    days_of_study = models.CharField(blank=True, choices=DaysofstudyType.choices, max_length=60)
+    StudydaysType = models.TextChoices('StudydaysType', 'Monday Tuesday Wednesday Thursday Friday Saturday')
+    days_of_study = models.CharField(blank=True, choices=StudydaysType.choices, max_length=60)
     time_of_study = models.TimeField()
+
 
 class Group(models.Model):
     course = models.ManyToManyField(Course)
     mentor = models.ManyToManyField(Mentor)
     listener = models.ManyToManyField(Listener)
     launch_time = models.TimeField()
-    days_of_study = models.CharField(blank=True, choices=DaysofstudyType.choices, max_length=60)
+    StudydaysType = models.TextChoices('StudydaysType', 'Monday Tuesday Wednesday Thursday Friday Saturday')
+    days_of_study = models.CharField(blank=True, choices=StudydaysType.choices, max_length=60)
